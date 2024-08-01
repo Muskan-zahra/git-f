@@ -1,0 +1,39 @@
+create database walls;
+use walls;
+create table sales(
+id int primary key,
+year int,
+quarter text,
+sales real, 
+product text
+);
+ insert into sales(id, year, quarter, sales, product) 
+ values 
+ (1, 2022, 'Q1', 2100, 'product A'),
+ (2, 2022, 'Q1', 1100, 'product B'),
+ (3, 2022, 'Q2', 3100, 'product A'),
+ (4, 2022, 'Q2', 2900, 'product B'),
+ (5, 2022, 'Q3', 2100, 'product A'),
+ (6, 2022, 'Q3', 6100, 'product B'),
+ (7, 2022, 'Q4', 2800, 'product A'),
+ (8, 2022, 'Q4', 2100, 'product B'),
+ (9, 2021, 'Q1', 1200, 'product A'),
+ (10, 2021, 'Q1', 4100, 'product B'),
+ (11, 2021, 'Q2', 2900, 'product A'),
+ (12, 2021, 'Q2', 4100, 'product B'),
+ (13, 2021, 'Q3', 2340, 'product A'),
+ (14, 2021, 'Q3', 2500, 'product B'),
+ (15, 2021, 'Q4', 2700, 'product A'),
+ (16, 2021, 'Q4', 2000, 'product B');
+ 
+ select * from sales;
+ select quarter, sum(sales) total_sales from sales where year=2022 group by quarter;
+ select quarter, sum(sales) total_sales from sales where year=2021 group by quarter;
+ 
+ select
+ (select sum(sales) from sales where  year =2022 and quarter = 'Q1') as Q1_total_sales,
+ (select sum(sales) from sales where  year =2021 and quarter = 'Q1') as Q1_total_sales;
+
+select product, sum(sales) as total_sales from sales group by product order by total_sales  desc limit 1;
+
+
